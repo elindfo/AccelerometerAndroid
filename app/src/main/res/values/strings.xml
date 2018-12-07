@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AndroidLabb3</string>
+    <string name="value_text_string">0</string>
+    <string name="filter_factor_value_text">Filter Factor: </string>
 </resources>

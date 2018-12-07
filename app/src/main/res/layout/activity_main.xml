@@ -7,12 +7,45 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:id="@+id/value_text"
+        android:layout_width="289dp"
+        android:layout_height="253dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/value_text_string"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filter_factor_seekbar"
+        app:layout_constraintVertical_bias="0.33"
+        tools:textSize="144sp" />
+
+    <SeekBar
+        android:id="@+id/filter_factor_seekbar"
+        android:layout_width="215dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/filter_factor_text"
+        android:max="100"
+        android:progress="20"/>
+
+    <TextView
+        android:id="@+id/filter_factor_text"
+        android:layout_width="wrap_content"
+        android:layout_height="21dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/filter_factor_value_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
