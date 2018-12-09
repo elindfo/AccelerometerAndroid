@@ -3,7 +3,6 @@ package com.example.erik.androidlabb3;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
-import android.util.Log;
 
 public class AccelerometerListener implements SensorEventListener {
 
@@ -17,16 +16,16 @@ public class AccelerometerListener implements SensorEventListener {
     public void onSensorChanged(SensorEvent event) {
         //https://stackoverflow.com/questions/11175599/how-to-measure-the-tilt-of-the-phone-in-xy-plane-using-accelerometer-in-android?fbclid=IwAR2RDNlBMFV7oXy54L_Z8QM5XxtCVsYYhRN9DFL88a7aXWnm19pgCIWyIYA
         double[] g = convertFloatsToDoubles(event.values.clone());
-        double normOfG = Math.abs(Math.sqrt(g[0] * g[0] + g[1] * g[1] + g[2] * g[2]));
-        double x = g[0] / normOfG;
-        double y = g[1] / normOfG;
-        double z = g[2] / normOfG;
+        double resultant = Math.abs(Math.sqrt(g[0] * g[0] + g[1] * g[1] + g[2] * g[2]));
+        double x = g[0] / resultant;
+        double y = g[1] / resultant;
+        double z = g[2] / resultant;
 
         double inclination = Math.round(Math.toDegrees(Math.acos(y)));
 
         long time = event.timestamp;
 
-        callbackActivity.callback(new AccelerometerData(x, y, z, inclination, time));
+        callbackActivity.callback(new AccelerometerData(x, y, z, inclination, time, Math.abs(resultant - 9.82)));
     }
 
     @Override
@@ -54,13 +53,15 @@ public class AccelerometerListener implements SensorEventListener {
         private double z;
         private double inclination;
         private long time;
+        private double resultant;
 
-        public AccelerometerData(double x, double y, double z, double inclination, long time) {
+        public AccelerometerData(double x, double y, double z, double inclination, long time, double resultant) {
             this.x = x;
             this.y = y;
             this.z = z;
             this.inclination = inclination;
             this.time = time;
+            this.resultant = resultant;
         }
 
         public double getX() {
@@ -101,6 +102,14 @@ public class AccelerometerListener implements SensorEventListener {
 
         public void setTime(long time) {
             this.time = time;
+        }
+
+        public double getResultant() {
+            return resultant;
+        }
+
+        public void setResultant(double resultant) {
+            this.resultant = resultant;
         }
     }
 }
