@@ -9,7 +9,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 
-public class MainActivity extends AppCompatActivity implements Callback<Double[]> {
+public class MainActivity extends AppCompatActivity implements Callback<AccelerometerListener.AccelerometerData> {
 
     private AccelerometerListener accelerometerListener;
     private SensorManager manager;
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements Callback<Double[]
     }
 
     @Override
-    public void callback(Double[] d) {
+    public void callback(AccelerometerListener.AccelerometerData data) {
         /*if(valueText != null){
             int degrees;
             if(d[1] >= 0 && d[2] >= 0){ //Kvadrant 1
@@ -102,14 +102,8 @@ public class MainActivity extends AppCompatActivity implements Callback<Double[]
             }
             valueText.setText(String.valueOf(degrees));
         }*/
-        int degrees = (int) accuracyFilter.calculateValue(d[3]); 
-        if(d[1] < 0 && d[2] <0){
-            degrees = 360 - degrees;
-        }
-        if(d[1] <0 && d[2] >0){
-            degrees = 360 - degrees;
-        }
-        valueText.setText(String.valueOf(String.valueOf(degrees)));
+        int inclination = (int) accuracyFilter.calculateValue(data.getInclination()); // y pos 1 och 4, z pos 1 och 2
+        valueText.setText(String.valueOf(String.valueOf(inclination)));
 
     }
 }
