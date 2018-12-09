@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements Callback<Double[]
 
     @Override
     public void callback(Double[] d) {
-        if(valueText != null){
+        /*if(valueText != null){
             int degrees;
             if(d[1] >= 0 && d[2] >= 0){ //Kvadrant 1
                 degrees = (int)(accuracyFilter.calculateValue(d[2]) * (90/9.82));
@@ -101,6 +101,15 @@ public class MainActivity extends AppCompatActivity implements Callback<Double[]
                 degrees = (int)(accuracyFilter.calculateValue(d[2]) * (90/9.82));
             }
             valueText.setText(String.valueOf(degrees));
+        }*/
+        int degrees = (int) accuracyFilter.calculateValue(d[3]); 
+        if(d[1] < 0 && d[2] <0){
+            degrees = 360 - degrees;
         }
+        if(d[1] <0 && d[2] >0){
+            degrees = 360 - degrees;
+        }
+        valueText.setText(String.valueOf(String.valueOf(degrees)));
+
     }
 }
